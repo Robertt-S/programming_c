@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 int main() {
-  printf("Hello, Judge!\n");
+  int n = 100*100;
+  printf("%d\n", n);
   return 0;
 }
