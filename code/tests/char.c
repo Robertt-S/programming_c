@@ -1,10 +1,9 @@
 #include <stdio.h>
 
 int main() {
-  char = 'a';
+  char character = 'a';
   
-  scanf("%d\n", &a);
-  printf("Look: %c\n", a);
+  printf("Look: %c\n", character); // Keep changing the % to see what you want.
   
   return 0;
 }
