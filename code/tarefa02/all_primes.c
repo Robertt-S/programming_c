@@ -1,7 +1,6 @@
 #include <stdio.h>
 
 int main() {
-  
   int num, i, numi = 2, result = 0;
 
   scanf("%d", &num);
@@ -15,9 +14,9 @@ int main() {
       }
       i++;
     }
-     if (result == 0) {
-      printf("%d\n", numi);
-     }
+    if (result == 0) {
+     printf("%d\n", numi);
+    }
     result = 0;
     numi++;
   }
