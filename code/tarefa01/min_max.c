@@ -23,7 +23,7 @@ int main() {
       printf("%d ", num3);
   }
   
-// Finding maximus  
+// Finding maximum
   if (num1 > num2 && num1 > num3) {
     printf("%d\n", num1);
   } else if (num2 > num3) {

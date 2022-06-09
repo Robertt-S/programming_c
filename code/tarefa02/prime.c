@@ -7,11 +7,11 @@ int main() {
     
   i = 2;
   while (i <= num / 2) {
-    i++;
     if (num % i == 0) {
       result++;
       break;
     }
+    i++;
   }
   
   if (num == 0 || num == 1) {
@@ -23,7 +23,7 @@ int main() {
     }
     
    return 0;
-  }
+}
 
   /* wrong tentative
   int num, divider, warn;

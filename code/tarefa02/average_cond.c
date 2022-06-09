@@ -7,7 +7,6 @@ int main() {
   storage = 0;
   count = 0;
   
-  
   while (count == count) {
     scanf("%f", &num);
     storage += num;
