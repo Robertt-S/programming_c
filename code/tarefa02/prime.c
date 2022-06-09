@@ -23,7 +23,7 @@ int main() {
     }
     
    return 0;
-  }
+}
 
   /* wrong tentative
   int num, divider, warn;
