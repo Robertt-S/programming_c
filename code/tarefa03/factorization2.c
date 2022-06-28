@@ -1,13 +1,19 @@
 #include <stdio.h>
 
 int main() {
-  int num, omegaNum, prime, count = 0;
-  int i, numi = 2;
+  int num, omegaNum, prime, count = 0, numi = 2;
   
+/*
+  Pedindo um número inicial.
+*/
   scanf("%d", &num);
   
   omegaNum = num;
   
+/*
+  Enquanto esse número for maior que 1 vamos fatorando-o
+  em fatores primos e contando quantas vezes ele é dividido.
+*/
   while (num > 1) {
     while (numi <= num) {
       prime = numi;
