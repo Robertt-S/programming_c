@@ -6,7 +6,10 @@ int main() {
   int count1 = 0, count2 = 0, count3 = 0, count4 = 0, count5 = 0;
   int count6 = 0, count7 = 0, count8 = 0, count9 = 0;
   
-  
+/*
+  Pedimos um número e em cada caso somamos 1 para o contador do
+  respectivo caso.
+*/
   while (num != 0) {
     scanf("%d", &num);
     
