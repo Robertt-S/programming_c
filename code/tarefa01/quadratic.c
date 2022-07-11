@@ -4,7 +4,7 @@
 int main() {
   float a, b, c, delta, firstDegree;
   
-  scanf("%f %f %f", &a, &b, &c);
+  scanf("%f%f%f", &a, &b, &c);
   
   delta = pow(b, 2) - 4 * a * c;
   firstDegree = -c/b;
