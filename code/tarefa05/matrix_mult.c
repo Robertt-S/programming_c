@@ -24,7 +24,6 @@ int Flag(int orderA1, int orderB0) {
 void MatrixA(int orderA0, int orderA1, int matrixA[500][500]) {
   int i, j;
   
-  
   for (i = 0; i < orderA0; i++) {
       for (j = 0; j < orderA1; j++) {
         matrixA[i][j] = 0;
@@ -51,12 +50,11 @@ void MatrixB(int orderB0, int orderB1, int matrixB[500][500]) {
 void MatrixResult(int orderA0, int orderB0, int orderB1, int matrixA[500][500], int matrixB[500][500], int matrixResult[500][500]) {
   int i, j, k;
   
-  
   for (i = 0; i < orderA0; i++) {
     for (j = 0; j < orderB1; j++) {
       matrixResult[i][j] = 0;
       for (k = 0; k < orderB0; k++) {
-        matrixResult[i][j] += matrixA[i][k] * matrixB[k][j];
+        matrixResult[i][j] += matrixA[i][k]*matrixB[k][j];
       }
     }
   }
@@ -74,40 +72,47 @@ void MatrixResult(int orderA0, int orderB0, int orderB1, int matrixA[500][500], 
 void MatrixPrinter(int orderA0, int orderA1, int orderB0, int orderB1, int matrixA[500][500], int matrixB[500][500], int matrixResult[500][500]) {
   int i, j;
   
-  printf("\nMatriz 1 (%dx%d)\n", orderA0, orderA1);
+  printf("Matriz 1 (%dx%d)\n", orderA0, orderA1);
   for (i = 0; i < orderA0; i++) {
     for (j = 0; j < orderA1; j++) {
       if (j == orderA1 - 1) {
         printf("%d\n", matrixA[i][j]);
       } else {
-        printf("%d ", matrixA[i][j]);
+        printf("%d\t", matrixA[i][j]);
       }
     }
   }
   
-  printf("\nMatriz 2 (%dx%d)\n", orderB0, orderB1);
+  //printf("\n");
+  
+  printf("Matriz 2 (%dx%d)\n", orderB0, orderB1);
   for (i = 0; i < orderB0; i++) {
     for (j = 0; j < orderB1; j++) {
       if (j == orderB1 - 1) {
         printf("%d\n", matrixB[i][j]);
       } else {
-        printf("%d ", matrixB[i][j]);
+        printf("%d\t", matrixB[i][j]);
       }
     }
   }
   
-  printf("\nMatriz 1 * Matriz 2 (%dx%d)\n", orderA0, orderB1);
+  //printf("\n");
+  
+  printf("Matriz 1 * Matriz 2 (%dx%d)\n", orderA0, orderB1);
   for (i = 0; i < orderA0; i++) {
     for (j = 0; j < orderB1; j++) {
-      printf("%d ", matrixResult[i][j]);
+      if (j == orderB1 - 1) {
+        printf("%d\n", matrixResult[i][j]);
+      } else {
+        printf("%d\t", matrixResult[i][j]);
+      }
     }
-    printf("\n");
   }
 }
 
 int main() {
   int orderA0, orderA1, orderB0, orderB1;
-  int matrixA[500][500], matrixB[00][500], matrixResult[500][500];
+  int matrixA[500][500], matrixB[500][500], matrixResult[500][500];
   
   orderA0 = Receiver();
   orderA1 = Receiver();
