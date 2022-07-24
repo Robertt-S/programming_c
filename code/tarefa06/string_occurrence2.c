@@ -19,7 +19,7 @@ int CheckingOccurrence() {
   
   realCount = 0;
   count = 0;
-  for (i = 0; i < strlen(string0) - 1; i += (strlen(string1) - 1)) {
+  for (i = 0; i < strlen(string0) - 1; i++) {
     for (j = 0; j < strlen(string1) - 1; j++) {
       
       if (string0[i + j] == string1[j]) {
@@ -28,6 +28,7 @@ int CheckingOccurrence() {
       
       if (count == strlen(string1) - 1) {
         realCount++;
+        i += (strlen(string1) - 1);
       }
       
     }
@@ -43,7 +44,7 @@ void OccurrencePrinter() {
   
   occurrence = CheckingOccurrence();
   
-  printf("Número de ocorrência:%2d\n", occurrence);
+  printf("Número de ocorrência: %d\n", occurrence);
   
   return;
 }

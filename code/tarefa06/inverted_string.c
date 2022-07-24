@@ -26,7 +26,7 @@ void InvertedString(char string[1000]) {
   return;
 }
 
-//==r Exibindo o vetor modificado.
+//=== Exibindo o vetor modificado.
 void StringPrinter() {
   char string[1000];
   

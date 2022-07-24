@@ -42,7 +42,6 @@ void Printer() {
 
 
 int main() {
-  char coinSequence[1000];
   
   Printer();
   
