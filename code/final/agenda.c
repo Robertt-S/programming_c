@@ -249,11 +249,6 @@ int End() {
   return 0;
 }
 
-/*=== Opções para serem escolhidas.
-void Capsule(struct PersonalInfo info[INFO_MAX]) {
-  
-}
-*/
 
 
 
