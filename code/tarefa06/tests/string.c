@@ -4,8 +4,8 @@
 //=== Recebendo strings
 void StringReceiver(char string0[1000], char string1[1000]) {
   
-  fgets(string0, 1000, stdin);
-  fgets(string1, 1000, stdin);
+  scanf("%s", string0);
+  scanf("%s", string1);
   
   return;
 }
@@ -19,14 +19,14 @@ int CheckingOccurrence() {
   
   realCount = 0;
   count = 0;
-  for (i = 0; i < strlen(string0) - 1; i++) {
-    for (j = 0; j < strlen(string1) - 1; j++) {
+  for (i = 0; i < strlen(string0); i++) {
+    for (j = 0; j < strlen(string1); j++) {
       
       if (string0[i + j] == string1[j]) {
         count++;
       }
       
-      if (count == strlen(string1) - 1) {
+      if (count == strlen(string1)) {
         realCount++;
       }
       

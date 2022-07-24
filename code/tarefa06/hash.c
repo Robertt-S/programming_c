@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-//=== Recebedor de strings genérico e limpador do \0 das strings.
+//=== Recebedor de strings genérico e limpador do último elemento das strings.
 void StringReceiver(char string0[100], char string1[100]) {
   int i;
   
