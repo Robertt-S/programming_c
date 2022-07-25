@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 
-void Capsule();
-
 #define NAME_MAX 101
 #define NUM_MAX 101
 #define INFO_MAX 101
@@ -39,7 +37,6 @@ void CharInput(char contact[NAME_MAX]) {
 void CheckingIndex(struct PersonalInfo info[INFO_MAX],int index) {
   if (index < 1 || index > 100) {
     puts(INDEX_ERROR);
-    Capsule(info);
   }
   return;
 }
@@ -71,7 +68,6 @@ void CheckingList(struct PersonalInfo info[INFO_MAX]) {
     if (index == INFO_MAX - 1) {
       if (count == INFO_MAX) {
         puts(EMPTY_LIST);
-        Capsule(info);
       }
     }
   }
@@ -84,10 +80,32 @@ void PrintingSingleContact(struct PersonalInfo info[INFO_MAX], int contact) {
   return;
 }
 
+void PrintList(struct PersonalInfo info[INFO_MAX]) {
+  int contact;
+  
+  for (contact = 0; contact < INFO_MAX; contact++) {
+    if (strlen(info[contact].name) == 0 || strlen(info[contact].name) == 1) {
+      continue;
+    }
+    PrintingSingleContact(info, contact);
+  }
+  return;
+}
+
+void SingleContact(struct PersonalInfo info[INFO_MAX], int contact) {
+  
+  if (strlen(info[contact].name) == 0 || strlen(info[contact].name) == 1) {
+    puts(EMPTY_INDEX); // NULL_CONTACT
+  } else {
+    PrintingSingleContact(info, contact);
+  }
+  
+  return;
+}
+
 void CheckingIndexEmptiness(struct PersonalInfo info[INFO_MAX], int index) {
   if ((strlen(info[index].name) == 0 || strlen(info[index].name) == 1) && (strlen(info[index].phoneNumber) == 0 || strlen(info[index].phoneNumber) == 1)) {
     puts(EMPTY_INDEX);
-    Capsule(info);
   }
   return;
 }
@@ -101,30 +119,49 @@ void DeletingPrintingContactList(struct PersonalInfo info[INFO_MAX]) {
     }
     PrintingSingleContact(info, contact);
   }
-  
-  Capsule(info);
-  
   return;
 }
 
-int CheckingNameContact(struct PersonalInfo info[INFO_MAX], char contact[NAME_MAX], int *count) {
-  int index, mark;
+int CheckingNameContact(struct PersonalInfo info[INFO_MAX], char contact[NAME_MAX]) {
+  int index, count, mark;
   
-  (*count) = 0;
+  mark = 0;
+  count = 0;
   for (index = 0; index < INFO_MAX; index++) {
     if (strcmp(info[index].name, contact) == 0) {
-      (*count)++;
+      count++;
       mark = index;
     }
     
     if (index == INFO_MAX - 1) {
-      if ((*count) == 0) {
+      if (count == 0) {
         puts(NULL_CONTACT);
-        //Capsule();
       }
     }
   }
   return mark;
+}
+
+void CleanerByIndex(struct PersonalInfo info[INFO_MAX], int contact) {
+  char cleaner[2] = {' '};
+  
+  strcpy(info[contact].name, cleaner);
+  strcpy(info[contact].phoneNumber, cleaner);
+  
+  puts(REMOVED_CONTACT);
+  
+  return;
+}
+
+void CleanerByName(struct PersonalInfo info[INFO_MAX], int contact) {
+  char cleaner[2] = {' '};
+  
+  strcpy(info[contact].name, cleaner);
+  strcpy(info[contact].phoneNumber, cleaner);
+  
+  puts(REMOVED_CONTACT);
+  
+  return;
 }
 
 
@@ -143,25 +180,14 @@ void GetNamePhone(struct PersonalInfo info[INFO_MAX]) {
   
   puts(SUCCESSFUL_REGISTRATION);
   
-  Capsule(info);
-  
   return;
 }
 
 //===  2- Exibidor da lista de contatos inteira.
-void PrintingContactList(struct PersonalInfo info[INFO_MAX]) {
-  int contact;
+void PrintContactList(struct PersonalInfo info[INFO_MAX]) {
   
   CheckingList(info);
-  
-  for (contact = 0; contact < INFO_MAX; contact++) {
-    if (strlen(info[contact].name) == 0 || strlen(info[contact].name) == 1) {
-      continue;
-    }
-    PrintingSingleContact(info, contact);
-  }
-  
-  Capsule(info);
+  PrintList(info);
   
   return;
 }
@@ -172,17 +198,9 @@ void ShowingSingleContact(struct PersonalInfo info[INFO_MAX]) {
   
   contact = Input();
   
-  CheckingIndex(info, contact);
-  if (strlen(info[contact].name) == 0 || strlen(info[contact].name) == 1) {
-    puts(NULL_CONTACT); // EMPTY_INDEX
-    Capsule(info);
-  } else {
-    PrintingSingleContact(info, contact);
-  }
-  
   CheckingList(info);
-  
-  Capsule(info);
+  CheckingIndex(info, contact);
+  SingleContact(info, contact);
   
   return;
 }
@@ -190,17 +208,13 @@ void ShowingSingleContact(struct PersonalInfo info[INFO_MAX]) {
 //=== 4 - Deleção através do índice do contato.
 void PhoneDeletingContact(struct PersonalInfo info[INFO_MAX]) {
   int contact;
-  char cleaner[2] = {' '};
   
   contact = Input();
   
   CheckingIndex(info, contact);
   CheckingIndexEmptiness(info, contact);
   
-  strcpy(info[contact].name, cleaner);
-  strcpy(info[contact].phoneNumber, cleaner);
-  
-  puts(REMOVED_CONTACT);
+  CleanerByIndex(info, contact);
   
   DeletingPrintingContactList(info);
   
@@ -209,19 +223,15 @@ void PhoneDeletingContact(struct PersonalInfo info[INFO_MAX]) {
 
 //=== 5 - Deleção através do nome.
 void NameDeletingContact(struct PersonalInfo info[INFO_MAX]) {
-  char contact[NAME_MAX], cleaner[4] = {' '};
-  int index, count;
+  char contact[NAME_MAX], cleaner[2] = {' '};
+  int index;
   
   CharInput(contact);
   
-  index = CheckingNameContact(info, contact, &count);
+  index = CheckingNameContact(info, contact);
   //CheckingNameEmptiness(info, contact);
-  
-  if (count != 0) {
-    strcpy(info[index].name, cleaner);
-    strcpy(info[index].phoneNumber, cleaner);
-  
-    puts(REMOVED_CONTACT);
+  if (index != 0) {
+   CleanerByName(info, index);
   }
   
   DeletingPrintingContactList(info);
@@ -230,47 +240,41 @@ void NameDeletingContact(struct PersonalInfo info[INFO_MAX]) {
 }
 
 //=== Saída da aplicação.
-void End() {
+int End() {
   puts(END);
   
-  return;
-}
-
-//=== Opções para serem escolhidas.
-void Capsule(struct PersonalInfo info[INFO_MAX]) {
-  int chooseOption;
-  
-  chooseOption = Input();
-  
-  while (chooseOption < 0 || chooseOption > 5) {
-    puts(END_CHOOSE);
-    chooseOption = Input();
-  }
-  
-  if (chooseOption == 1) {
-    GetNamePhone(info);
-  } else if (chooseOption == 2) {
-    PrintingContactList(info);
-  } else if (chooseOption == 3) {
-    ShowingSingleContact(info);
-  } else if (chooseOption == 4) {
-    PhoneDeletingContact(info);
-  } else if (chooseOption == 5) {
-    NameDeletingContact(info);
-  } else if (chooseOption == 0) {
-    End();
-    return;
-  }
-  return;
+  return 0;
 }
 
 
 
-
+//=== Menu de opções.
 int main() {
   struct PersonalInfo info[INFO_MAX] = {0};
+  int chooseOption = 10;
   
-  Capsule(info);
-  
+  while (chooseOption != 0) {
+    chooseOption = Input();
+    
+    while (chooseOption < 0 || chooseOption > 5) {
+      puts(END_CHOOSE);
+      chooseOption = Input();
+    }
+    
+    if (chooseOption == 1) {
+      GetNamePhone(info);
+    } else if (chooseOption == 2) {
+      PrintContactList(info);
+    } else if (chooseOption == 3) {
+      ShowingSingleContact(info);
+    } else if (chooseOption == 4) {
+      PhoneDeletingContact(info);
+    } else if (chooseOption == 5) {
+      NameDeletingContact(info);
+    } else if (chooseOption == 0) {
+      End();
+      return 0;
+    }
+  }
   return 0;
 }
