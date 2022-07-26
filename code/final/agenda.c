@@ -20,6 +20,8 @@ struct PersonalInfo {
   char phoneNumber[NUM_MAX];
 };
 
+//==== Funções usadas posteriormente
+
 int Input() {
   int num;
   
@@ -80,7 +82,7 @@ void PrintingSingleContact(struct PersonalInfo info[INFO_MAX], int contact) {
   return;
 }
 
-void PrintList(struct PersonalInfo info[INFO_MAX]) {
+void PrintingContactList(struct PersonalInfo info[INFO_MAX]) {
   int contact;
   
   for (contact = 0; contact < INFO_MAX; contact++) {
@@ -122,7 +124,7 @@ void DeletingPrintingContactList(struct PersonalInfo info[INFO_MAX]) {
   return;
 }
 
-int CheckingNameContact(struct PersonalInfo info[INFO_MAX], char contact[NAME_MAX]) {
+int CheckingContactName(struct PersonalInfo info[INFO_MAX], char contact[NAME_MAX]) {
   int index, count, mark;
   
   mark = 0;
@@ -187,7 +189,7 @@ void GetNamePhone(struct PersonalInfo info[INFO_MAX]) {
 void PrintContactList(struct PersonalInfo info[INFO_MAX]) {
   
   CheckingList(info);
-  PrintList(info);
+  PrintingContactList(info);
   
   return;
 }
@@ -222,13 +224,13 @@ void PhoneDeletingContact(struct PersonalInfo info[INFO_MAX]) {
 }
 
 //=== 5 - Deleção através do nome.
-void NameDeletingContact(struct PersonalInfo info[INFO_MAX]) {
+void DeletingContactName(struct PersonalInfo info[INFO_MAX]) {
   char contact[NAME_MAX], cleaner[2] = {' '};
   int index;
   
   CharInput(contact);
   
-  index = CheckingNameContact(info, contact);
+  index = CheckingContactName(info, contact);
   //CheckingNameEmptiness(info, contact);
   if (index != 0) {
    CleanerByName(info, index);
@@ -270,7 +272,7 @@ int main() {
     } else if (chooseOption == 4) {
       PhoneDeletingContact(info);
     } else if (chooseOption == 5) {
-      NameDeletingContact(info);
+      DeletingContactName(info);
     } else if (chooseOption == 0) {
       End();
       return 0;
