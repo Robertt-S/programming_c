@@ -62,12 +62,12 @@ void CheckingList(struct PersonalInfo info[INFO_MAX]) {
   int index, count;
   
   count = 0;
-  for (index = 0; index < INFO_MAX; index++) {
+  for (index = 1; index <= INFO_MAX; index++) {
     if (strlen(info[index].name) == 0 || strlen(info[index].name) == 1) {
       count++;
     }
     
-    if (index == INFO_MAX - 1) {
+    if (index == INFO_MAX) {
       if (count == INFO_MAX) {
         puts(EMPTY_LIST);
       }
@@ -85,7 +85,7 @@ void PrintingSingleContact(struct PersonalInfo info[INFO_MAX], int contact) {
 void PrintingContactList(struct PersonalInfo info[INFO_MAX]) {
   int contact;
   
-  for (contact = 0; contact < INFO_MAX; contact++) {
+  for (contact = 1; contact <= INFO_MAX; contact++) {
     if (strlen(info[contact].name) == 0 || strlen(info[contact].name) == 1) {
       continue;
     }
@@ -115,7 +115,7 @@ void CheckingIndexEmptiness(struct PersonalInfo info[INFO_MAX], int index) {
 void DeletingPrintingContactList(struct PersonalInfo info[INFO_MAX]) {
   int contact;
   
-  for (contact = 0; contact < INFO_MAX; contact++) {
+  for (contact = 1; contact <= INFO_MAX; contact++) {
     if (strlen(info[contact].name) == 0 || strlen(info[contact].name) == 1) {
       continue;
     }
@@ -129,13 +129,13 @@ int CheckingContactName(struct PersonalInfo info[INFO_MAX], char contact[NAME_MA
   
   mark = 0;
   count = 0;
-  for (index = 0; index < INFO_MAX; index++) {
+  for (index = 1; index <= INFO_MAX; index++) {
     if (strcmp(info[index].name, contact) == 0) {
       count++;
       mark = index;
     }
     
-    if (index == INFO_MAX - 1) {
+    if (index == INFO_MAX) {
       if (count == 0) {
         puts(NULL_CONTACT);
       }
