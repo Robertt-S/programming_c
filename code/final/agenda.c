@@ -247,10 +247,8 @@ void DeletingContactName(struct PersonalInfo info[INFO_MAX]) {
   
   if (index != 0) {
    CleanerByName(info, index);
+   DeletingPrintingContactList(info);
   }
-  
-  DeletingPrintingContactList(info);
-  
   return;
 }
 
