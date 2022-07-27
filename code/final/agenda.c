@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#define NAME_MAX 101
-#define NUM_MAX 101
-#define INFO_MAX 101
+#define NAME_MAX 100
+#define NUM_MAX 100
+#define INFO_MAX 100
 
 #define SUCCESSFUL_REGISTRATION "Contato cadastrado com sucesso!"
 #define INDEX_ERROR "Índice digitado não existe [1, 100]!"
