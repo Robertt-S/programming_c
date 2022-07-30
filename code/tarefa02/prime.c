@@ -20,7 +20,7 @@ int main() {
     printf("O número %d é primo!\n", num);
   } else {
     printf("O número %d não é primo!\n", num);
-    }
+  }
     
    return 0;
 }
