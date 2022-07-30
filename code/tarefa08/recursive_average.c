@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+ 
 //=== Recebedor e calculador da média aritmética.
 int Average(int numbers[1000], float count, float sum) {
   float average;
@@ -17,21 +17,13 @@ int Average(int numbers[1000], float count, float sum) {
   
   return 0;
 }
-
-//=== Exibidor da média aritmética.
-void AveragePrinter() {
+ 
+ 
+int main() {
   int numbers[1000] = {0};
   float count = 0, sum = 0;
   
   Average(numbers, count, sum);
-  
-  return;
-}
-
-
-int main() {
-  
-  AveragePrinter();
   
   return 0;
 }
