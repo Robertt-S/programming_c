@@ -63,7 +63,7 @@ int CheckingList(struct PersonalInfo info[INFO_MAX]) {
   
   count = 0;
   for (index = 1; index <= INFO_MAX; index++) {
-    if (strlen(info[index].name) == 0 || strlen(info[index].name) == 1) {
+    if (strlen(info[index].name) == 0) {
       count++;
     }
     
@@ -86,7 +86,7 @@ void PrintingContactList(struct PersonalInfo info[INFO_MAX]) {
   int contactIndex;
   
   for (contactIndex = 1; contactIndex <= INFO_MAX; contactIndex++) {
-    if (strlen(info[contactIndex].name) == 0 || strlen(info[contactIndex].name) == 1) {
+    if (strlen(info[contactIndex].name) == 0) {
       continue;
     }
     PrintingSingleContact(info, contactIndex);
@@ -142,19 +142,8 @@ int CheckingContactName(struct PersonalInfo info[INFO_MAX], char contactName[NAM
   return mark;
 }
 
-void CleanerByIndex(struct PersonalInfo info[INFO_MAX], int contactIndex) {
-  char cleaner[2] = {' '};
-  
-  strcpy(info[contactIndex].name, cleaner);
-  strcpy(info[contactIndex].phoneNumber, cleaner);
-  
-  puts(REMOVED_CONTACT);
-  
-  return;
-}
-
-void CleanerByName(struct PersonalInfo info[INFO_MAX], int contactIndex) {
-  char cleaner[2] = {' '};
+void Cleaner(struct PersonalInfo info[INFO_MAX], int contactIndex) {
+  char cleaner[INFO_MAX] = {0};
   
   strcpy(info[contactIndex].name, cleaner);
   strcpy(info[contactIndex].phoneNumber, cleaner);
@@ -230,7 +219,7 @@ void PhoneDeletingContact(struct PersonalInfo info[INFO_MAX]) {
     return;
   }
   
-  CleanerByIndex(info, contactIndex);
+  Cleaner(info, contactIndex);
   DeletingPrintingContactList(info);
   
   return;
@@ -246,7 +235,7 @@ void DeletingContactName(struct PersonalInfo info[INFO_MAX]) {
   index = CheckingContactName(info, contactName);
   
   if (index != 0) {
-   CleanerByName(info, index);
+   Cleaner(info, index);
    DeletingPrintingContactList(info);
   }
   return;

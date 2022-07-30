@@ -1,10 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
-void Capsule();
-
-#define NAME_MAX 101
-#define NUM_MAX 101
+#define NAME_MAX 100
+#define NUM_MAX 100
 #define INFO_MAX 101
 
 #define SUCCESSFUL_REGISTRATION "Contato cadastrado com sucesso!"
@@ -30,107 +28,40 @@ int Input() {
   return num;
 }
 
+void CharInput(char contactName[NAME_MAX]) {
+  scanf("%s", contactName);
+  
+  return;
+}
+
 /*
-void CharInput(char contact[NAME_MAX]) {
-  scanf("%s", contact);
+void GetNamePhone(struct PersonalInfo info[INFO_MAX]) {
+  int index, sum;
   
-  return;
-}
-
-void CheckingIndex(struct PersonalInfo info[INFO_MAX],int index) {
+  sum = 0;
+  
+  scanf("%d", &index);
+  
   if (index < 1 || index > 100) {
-    puts(INDEX_ERROR);
-    Capsule(info);
-  }
-  return;
-}
-
-void SettingNamePhone(struct PersonalInfo info[INFO_MAX], int index) {
-  scanf("%s", info[index].name);
-  scanf("%s", info[index].phoneNumber);
-  
-  return;
-}
-
-void CheckingPhone(struct PersonalInfo info[INFO_MAX], int index) {
-  while (strlen(info[index].phoneNumber) != 10 && strlen(info[index].phoneNumber) != 11) {
-    puts(PHONE_ERROR);
+    printf("Índice digitado não existe [1,100]!\n");
+  } else {
+    scanf("%s", info[index].name);
     scanf("%s", info[index].phoneNumber);
-  }
-  return;
-}
-
-void CheckingList(struct PersonalInfo info[INFO_MAX]) {
-  int index, count;
-  
-  count = 0;
-  for (index = 0; index < INFO_MAX; index++) {
-    if (strlen(info[index].name) == 0 || strlen(info[index].name) == 1) {
-      count++;
-    }
+    sum = strlen(info[index].phoneNumber);
     
-    if (index == INFO_MAX - 1) {
-      if (count == INFO_MAX) {
-        puts(EMPTY_LIST);
-        Capsule(info);
-      }
+    if (((strlen(info[index].phoneNumber)) == 10) || (strlen(info[index].phoneNumber)) == 11) {
+      printf("Contato cadastrado com sucesso!\n");
+    } else {
+      do {
+        printf("Telefone não tem 10 ou 11 dígitos! Favor digite novamente.\n");
+        scanf("%s", info[index].phoneNumber);
+      } while (((strlen(info[index].phoneNumber)) != 10) && (strlen(info[index].phoneNumber)) != 11);
+      printf("Contato cadastrado com sucesso!\n");
     }
   }
   return;
-}
-
-void PrintingSingleContact(struct PersonalInfo info[INFO_MAX], int contact) {
-  printf("Contato[%d]- Nome:%s Tel:%s\n", contact, info[contact].name, info[contact].phoneNumber);
-  
-  return;
-}
-
-void CheckingIndexEmptiness(struct PersonalInfo info[INFO_MAX], int index) {
-  if ((strlen(info[index].name) == 0 || strlen(info[index].name) == 1) && (strlen(info[index].phoneNumber) == 0 || strlen(info[index].phoneNumber) == 1)) {
-    puts(EMPTY_INDEX);
-    Capsule(info);
-  }
-  return;
-}
-
-void DeletingPrintingContactList(struct PersonalInfo info[INFO_MAX]) {
-  int contact;
-  
-  for (contact = 0; contact < INFO_MAX; contact++) {
-    if (strlen(info[contact].name) == 0 || strlen(info[contact].name) == 1) {
-      continue;
-    }
-    PrintingSingleContact(info, contact);
-  }
-  
-  Capsule(info);
-  
-  return;
-}
-
-int CheckingNameContact(struct PersonalInfo info[INFO_MAX], char contact[NAME_MAX]) {
-  int index, count, mark;
-  
-  count = 0;
-  for (index = 0; index < INFO_MAX; index++) {
-    if (strcmp(info[index].name, contact) == 0) {
-      count++;
-      mark = index;
-    }
-    
-    if (index == INFO_MAX - 1) {
-      if (count == 0) {
-        puts(NULL_CONTACT);
-        //Capsule();
-      }
-    }
-  }
-  return mark;
 }
 */
-
-//=============================================================================
-
 
 //=== 1 - Cadastra nome e número de telefone.
 void GetNamePhone(struct PersonalInfo info[INFO_MAX]) {
@@ -140,136 +71,253 @@ void GetNamePhone(struct PersonalInfo info[INFO_MAX]) {
   
   if (index < 1 || index > 100) {
     puts(INDEX_ERROR);
-    Capsule(info);
-  }
-  
-  scanf("%s", info[index].name);
-  scanf("%s", info[index].phoneNumber);
-  
-  while (strlen(info[index].phoneNumber) != 10 && strlen(info[index].phoneNumber) != 11) {
-    puts(PHONE_ERROR);
+    return;
+  } else {
+    scanf("%s", info[index].name);
     scanf("%s", info[index].phoneNumber);
+    
+    while (strlen(info[index].phoneNumber) != 10 && strlen(info[index].phoneNumber) != 11) {
+      puts(PHONE_ERROR);
+      scanf("%s", info[index].phoneNumber);
+    }
+    puts(SUCCESSFUL_REGISTRATION);
+    return;
   }
-  
-  puts(SUCCESSFUL_REGISTRATION);
-  
-  Capsule(info);
-  
-  return;
 }
 
-//===  2- Exibidor da lista de contatos inteira.
-void PrintingContactList(struct PersonalInfo info[INFO_MAX]) {
+
+
+// Dá 93
+void PrintContactList(struct PersonalInfo info[INFO_MAX]) {
+  int i, j, count;
+  
+  count = 0;
+  for (i = 1; i < INFO_MAX; i++) {
+    if (((strlen(info[i].phoneNumber)) == 10) || (strlen(info[i].phoneNumber)) == 11) {
+      count++;
+    }
+  }
+    
+  if (count == 0) {
+    printf("Agenda vazia!\n");
+    return;
+  } else {
+    for (j = 1; j < INFO_MAX; j++) {
+      if (((strlen(info[j].phoneNumber)) == 10) || (strlen(info[j].phoneNumber)) == 11) {
+        printf("Contato[%d]- Nome:%s Tel:%s\n", j, info[j].name, info[j].phoneNumber);
+      }
+    }
+    return;
+  }
+}
+
+/*=== 2 - Exibidor da lista de contatos inteira.
+void PrintContactList(struct PersonalInfo info[INFO_MAX]) {
   int index, count;
   
   count = 0;
-  for (index = 0; index < INFO_MAX; index++) {
-    if (strlen(info[index].name) == 0 || strlen(info[index].name) == 1) {
+  for (index = 1; index <= INFO_MAX; index++) {
+    if (strlen(info[index].name) == 0) {
       count++;
     }
     
-    if (index == INFO_MAX - 1) {
+    if (index == INFO_MAX) {
       if (count == INFO_MAX) {
         puts(EMPTY_LIST);
-        Capsule(info);
+        return;
+      } else {
+        for (index = 1; index <= INFO_MAX; index++) {
+          if (strlen(info[index].name) == 0) {
+            continue;
+          }
+          printf("Contato[%d]- Nome:%s Tel:%s\n", index, info[index].name, info[index].phoneNumber);
+        }
+      } 
+      
+    }
+  }
+  return;
+}
+*/
+
+
+
+
+
+
+/*
+void ShowingSingleContact(struct PersonalInfo info[INFO_MAX]) {
+  int index, i, count;
+  
+  count = 0;
+  for (i = 1; i < INFO_MAX; i++) {
+    if (((strlen(info[i].phoneNumber)) == 10) || (strlen(info[i].phoneNumber)) == 11) {
+      count++;
+    }
+    
+    if (i == INFO_MAX - 1) {
+      if (count == 0) {
+        printf("Agenda vazia!\n");
+        return;
       }
     }
   }
   
-  for (index = 0; index < INFO_MAX; index++) {
-    if (strlen(info[index].name) == 0 || strlen(info[index].name) == 1) {
-      continue;
-    }
-    printf("Contato[%d]- Nome:%s Tel:%s\n", index, info[index].name, info[index].phoneNumber);
-  }
   
-  Capsule(info);
+  scanf("%d", &index);
+  if (index < 1 || index > 100) {
+    printf("Índice digitado não existe [1,100]!\n");
+  } else if (((strlen(info[index].phoneNumber)) == 10) || (strlen(info[index].phoneNumber)) == 11) {
+    printf("Contato[%d]- Nome:%s Tel:%s\n", index, info[index].name, info[index].phoneNumber);
+  } else {
+    printf("Índice está vazio!\n");
+  }
   
   return;
 }
+*/
+
+
 
 //=== 3 - Exibidor de um único contato.
 void ShowingSingleContact(struct PersonalInfo info[INFO_MAX]) {
   int index, count;
   
-  index = Input();
-  
-  if (index < 1 || index > 100) {
-    puts(INDEX_ERROR);
-    Capsule(info);
-  }
-  
-  if (strlen(info[index].name) == 0 || strlen(info[index].name) == 1) {
-    puts(EMPTY_INDEX); // NULL_CONTACT
-    Capsule(info);
-  } else {
-    printf("Contato[%d]- Nome:%s Tel:%s\n", index, info[index].name, info[index].phoneNumber);
-  }
-  
   count = 0;
-  for (index = 0; index < INFO_MAX; index++) {
-    if (strlen(info[index].name) == 0 || strlen(info[index].name) == 1) {
+  for (index = 1; index < INFO_MAX; index++) {
+    if (strlen(info[index].phoneNumber) == 0) {
       count++;
     }
-    
-    if (index == INFO_MAX - 1) {
-      if (count == INFO_MAX) {
-        puts(EMPTY_LIST);
-        Capsule(info);
-      }
-    }
   }
   
-  Capsule(info);
+  if (count == INFO_MAX) {
+    //printf("%s\n" EMPTY_LIST);
+    puts(EMPTY_LIST);
+    return;
+  }
   
+  scanf("%d", &index);
+  
+  if (index < 1 || index > 100) {
+    //printf("%s\n", INDEX_ERROR);
+    puts(INDEX_ERROR);
+    return;
+  }
+  
+  if (strlen(info[index].phoneNumber) == 0) {
+    //printf("%s\n", EMPTY_INDEX);
+    puts(EMPTY_INDEX); // NULL_CONTACT
+  } else {
+    printf("Contato[%d]- Nome:%s Tel:%s\n", index, info[index].name, info[index].phoneNumber);
+    return;
+  }
+}
+
+
+
+
+
+
+/*
+void PhoneDeletingContact(struct PersonalInfo info[INFO_MAX]) {
+  int index, j;
+  
+  scanf("%d", &index);
+  if (index < 0 || index > 100) {
+    printf("Índice digitado não existe [1,100]!\n");
+  } else {
+    if (((strlen(info[index].phoneNumber)) == 10) || (strlen(info[index].phoneNumber)) == 11) {
+      strcpy(info[index].phoneNumber, "0");
+      printf ("Contato removido com sucesso!\n");
+      for (j = 1; INFO_MAX > j; j++) {
+        if (((strlen(info[j].phoneNumber)) == 10) || (strlen(info[j].phoneNumber)) == 11) {
+          printf("Contato[%d]- Nome:%s Tel:%s\n", j, info[j].name, info[j].phoneNumber);
+        }
+      }
+    } else {
+      printf ("Índice digitado está vazio!\n");
+    }
+  }
   return;
 }
+*/
+
 
 //=== 4 - Deleção através do índice do contato.
 void PhoneDeletingContact(struct PersonalInfo info[INFO_MAX]) {
-  char cleaner[2] = {' '};
-  int index;
+  char cleaner[1] = {'\0'};
+  int index = 0;
   
   index = Input();
   
   if (index < 1 || index > 100) {
     puts(INDEX_ERROR);
-    Capsule(info);
+    return;
+  } else if (strlen(info[index].name) == 0) {
+    puts(EMPTY_INDEX); // NULL_CONTACT
+    return;
+  } else {
+    strcpy(info[index].name, cleaner);
+    strcpy(info[index].phoneNumber, cleaner);
+    
+    puts(REMOVED_CONTACT);
   }
   
-  if ((strlen(info[index].name) == 0 || strlen(info[index].name) == 1) && (strlen(info[index].phoneNumber) == 0 || strlen(info[index].phoneNumber) == 1)) {
-    puts(EMPTY_INDEX);
-    Capsule(info);
-  }
-  
-  strcpy(info[index].name, cleaner);
-  strcpy(info[index].phoneNumber, cleaner);
-  
-  puts(REMOVED_CONTACT);
-  
-  for (index = 0; index < INFO_MAX; index++) {
-    if (strlen(info[index].name) == 0 || strlen(info[index].name) == 1) {
-      continue;
+  for (index = 1; index < INFO_MAX; index++) {
+    if (strlen(info[index].name) != 0) {
+      printf("Contato[%d]- Nome:%s Tel:%s\n", index, info[index].name, info[index].phoneNumber);
     }
-    printf("Contato[%d]- Nome:%s Tel:%s\n", index, info[index].name, info[index].phoneNumber);
   }
-  
-  Capsule(info);
-  
   return;
 }
 
+
+
+
+
+
+
+/*
+void DeletingContactName(struct PersonalInfo info[INFO_MAX]) {
+  int i, count;
+  char nameAux[INFO_MAX];
+  
+  scanf("%s", nameAux);
+  
+  count = 0;
+  
+  for (i = 1; INFO_MAX > i; i++) {
+    if ((strcmp(nameAux, info[i].name)) == 0) {
+      count++;
+    }
+  }
+  
+  if (count == 0) {
+    printf("Contato digitado não existe!\n");
+  } else {
+    for (int i = 0; i < INFO_MAX; i++) {
+      if (strcmp(nameAux, info[i].name) == 0) {
+        strcpy(info[i].phoneNumber, "0");
+        printf("Contato removido com sucesso!\n");
+      }
+    }
+  }
+  return;
+}
+*/
+
+
 //=== 5 - Deleção através do nome.
-void NameDeletingContact(struct PersonalInfo info[INFO_MAX]) {
-  char contact[NAME_MAX], cleaner[4] = {' '};
+void DeletingContactName(struct PersonalInfo info[INFO_MAX]) {
+  char contactName[NAME_MAX], cleaner[1] = {'\0'};
   int index, count, mark;
   
-  scanf("%s", contact);
+  CharInput(contactName);
   
   mark = 0;
   count = 0;
-  for (index = 0; index < INFO_MAX; index++) {
-    if (strcmp(info[index].name, contact) == 0) {
+  for (index = 1; index < INFO_MAX; index++) {
+    if (strcmp(info[index].name, contactName) == 0) {
       count++;
       mark = index;
     }
@@ -277,74 +325,111 @@ void NameDeletingContact(struct PersonalInfo info[INFO_MAX]) {
     if (index == INFO_MAX - 1) {
       if (count == 0) {
         puts(NULL_CONTACT);
-        //Capsule();
+        return;
+      } else {
+        strcpy(info[mark].name, cleaner);
+        strcpy(info[mark].phoneNumber, cleaner);
+        
+        puts(REMOVED_CONTACT);
       }
     }
   }
   
-  //CheckingNameEmptiness(info, contact);
-  
-  if (count != 0) {
-    strcpy(info[mark].name, cleaner);
-    strcpy(info[mark].phoneNumber, cleaner);
-  
-    puts(REMOVED_CONTACT);
-  }
-  
-  for (index = 0; index < INFO_MAX; index++) {
-    if (strlen(info[index].name) == 0 || strlen(info[index].name) == 1) {
-      continue;
+  for (index = 1; index < INFO_MAX; index++) {
+    if (strlen(info[index].name) != 0) {
+      printf("Contato[%d]- Nome:%s Tel:%s\n", index, info[index].name, info[index].phoneNumber);
     }
-    printf("Contato[%d]- Nome:%s Tel:%s\n", index, info[index].name, info[index].phoneNumber);
   }
-  
-  Capsule(info);
-  
   return;
 }
+
 
 //=== Saída da aplicação.
 void End() {
   puts(END);
-  
-  return;
-}
-
-//=== Opções para serem escolhidas.
-void Capsule(struct PersonalInfo info[INFO_MAX]) {
-  int chooseOption;
-  
-  chooseOption = Input();
-  
-  while (chooseOption < 0 || chooseOption > 5) {
-    puts(END_CHOOSE);
-    chooseOption = Input();
-  }
-  
-  if (chooseOption == 1) {
-    GetNamePhone(info);
-  } else if (chooseOption == 2) {
-    PrintingContactList(info);
-  } else if (chooseOption == 3) {
-    ShowingSingleContact(info);
-  } else if (chooseOption == 4) {
-    PhoneDeletingContact(info);
-  } else if (chooseOption == 5) {
-    NameDeletingContact(info);
-  } else if (chooseOption == 0) {
-    End();
-    return;
-  }
   return;
 }
 
 
-
-
+//=== Menu de opções.
 int main() {
-  struct PersonalInfo info[INFO_MAX] = {0};
+  struct PersonalInfo info[INFO_MAX] = {'\0'};
+  int chooseOption = 0;
   
-  Capsule(info);
+  do {
+    chooseOption = Input();
+    
+    if (chooseOption < 0 || chooseOption > 5) {
+      puts(END_CHOOSE);
+      continue;
+    }
+    
+    if (chooseOption == 1) {
+      GetNamePhone(info);
+    } else if (chooseOption == 2) {
+      PrintContactList(info);
+    } else if (chooseOption == 3) {
+      ShowingSingleContact(info);
+    } else if (chooseOption == 4) {
+      PhoneDeletingContact(info);
+    } else if (chooseOption == 5) {
+      DeletingContactName(info);
+    } else if (chooseOption == 0) {
+      End();
+    }
+  } while (chooseOption != 0);
   
   return 0;
 }
+
+
+/*
+1
+1
+Fabio
+1234567890
+1
+2
+Vitor
+1234567891
+2 =
+1
+7
+Sergio
+111111111
+1111111111 ==
+3
+6 ===
+2 +
+3 ++
+7
+4 !!!
+2 !!!
+5 ???
+Fabi ???
+5 ;;;
+Fabio ;;;
+2
+0
+
+Saída 4:
+Contato cadastrado com sucesso!
+Contato cadastrado com sucesso!
+Contato[1]- Nome:Fabio Tel:1234567890
+Contato[2]- Nome:Vitor Tel:1234567891  =
+Telefone não tem 10 ou 11 dígitos! Favor digite novamente.
+Contato cadastrado com sucesso! ==
+Índice digitado está vazio! ===
+Contato[1]- Nome:Fabio Tel:1234567890 +
+Contato[2]- Nome:Vitor Tel:1234567891 +
+Contato[7]- Nome:Sergio Tel:1111111111 +
+Contato[7]- Nome:Sergio Tel:1111111111 ++
+Contato removido com sucesso! !!!
+Contato[1]- Nome:Fabio Tel:1234567890 !!!
+Contato[7]- Nome:Sergio Tel:1111111111 !!!
+Contato digitado não existe! ???
+Contato removido com sucesso! ;;;
+Contato[7]- Nome:Sergio Tel:1111111111
+Contato[7]- Nome:Sergio Tel:1111111111
+Tchau!
+*/
