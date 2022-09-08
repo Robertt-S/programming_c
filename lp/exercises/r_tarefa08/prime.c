@@ -5,8 +5,10 @@ int Prime(int num, int base, int *count) {
   if (base < num) {
     if (num % base == 0) {
       (*count)++;
-      return 0;
+      //printf("count: %d\n", (*count));
+      //return 0;
     } else {
+      //printf("count: %d\n base: %d\n", (*count), base);
       Prime(num, base + 1, count);
     }
   }
@@ -21,7 +23,7 @@ void Printer() {
   
   Prime(num, base, &count);
   
-  printf("%d\n", count);
+  //printf("%d\n", count);
   
   if (num == 0 || num == 1) {
     printf("%d não é primo.\n", num);
