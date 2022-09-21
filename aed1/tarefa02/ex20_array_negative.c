@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int negativos(float *vetor, int N) {
   int i;
@@ -25,11 +26,13 @@ int negativos(float *vetor, int N) {
 
 
 int main() {
-  float vetor[1000];
+  float *vetor;
   int tamanhoArray;
   
-  printf("Quantas partes do vetor deseja usar?:\n");
+  printf("Tamanho do vetor?:\n");
   scanf("%d", &tamanhoArray);
+  
+  vetor = malloc(tamanhoArray * sizeof(float));
   
   negativos(vetor, tamanhoArray);
   
