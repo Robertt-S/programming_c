@@ -23,20 +23,12 @@ void minMax(int vetor[], int *min, int *max) {
   preencherVetor(vetor);
   
   *min = vetor[0];
-  for (i = 0; i < MAX; i++) {
-    if (*min <= vetor[i]) {
-      ;
-    } else {
-      *min = vetor[i];
-    }
-  }
-  
   *max = vetor[0];
   for (i = 0; i < MAX; i++) {
-    if (*max >= vetor[i]) {
-      ;
-    } else {
+    if (vetor[i] >= *max) {
       *max = vetor[i];
+    } else if (vetor[i] <= *min) {
+      *min = vetor[i];
     }
   }
   
@@ -51,7 +43,7 @@ int main() {
   
   minMax(vetor, &min, &max);
   
-  printf("O mínimo: %d\nO máximo: %d\n", min, max);
+  printf("\nO mínimo: %d\nO máximo: %d\n", min, max);
   
   return 0;
 }
