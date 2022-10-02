@@ -3,7 +3,6 @@
 #include <string.h>
 
 #define MAX 1000
-#define NAME_MAX 50
 
 typedef struct{
   int chave;
@@ -15,9 +14,15 @@ typedef struct{
   int ultimo;
 } ListaLinearSE;
 
+int listaVaziaLLSE(ListaLinearSE*);
+int listaCheiaLLSE(ListaLinearSE*);
 void inicializaLLSE(ListaLinearSE*);
+void destroiListaLLSE(ListaLinearSE*);
 void imprimeListaLLSE(ListaLinearSE*);
 int insereNoFinalLLSE(ListaLinearSE*,TipoItem);
+int insereNoInicioLLSE(ListaLinearSE*,TipoItem);
 int removeDoFinalLLSE(ListaLinearSE*,TipoItem*);
-int removeDoComecoLLSE(ListaLinearSE*,TipoItem*);
-int searchItemByName(ListaLinearSE*, char string[]);
+int removeDoInicioLLSE(ListaLinearSE*,TipoItem*);
+int adicionaNaPosicao(ListaLinearSE*, TipoItem, int);
+int retiraDaPosicao(ListaLinearSE*, TipoItem*, int);
+int retiraEspecifico(ListaLinearSE*, TipoItem*, char[]);
