@@ -151,3 +151,46 @@ int retiraEspecifico(ListaLinearSE *lista, TipoItem *item, char nome[50]) {
   
   return 0;
 }
+
+
+
+/* Lucas
+int RetiraEspecifico(ListaLinearSE *lista, int chave, char nome) {
+  int pos = lista->ultimo;
+  int i, k;
+
+  if (!listaVaziaLLSE(lista)) {
+    for (k = 0; k < lista->ultimo; k++) {
+      if (lista->itens[k].chave == chave) {
+        if (strcmp(lista->itens[k].nome, &nome) == 0) {
+          for (i = k; i < lista->ultimo; i++) {
+            lista->itens[i - 1] = lista->itens[i];
+          }
+        }
+        lista->ultimo--;
+        break;
+      }
+      break;
+      return 1;
+    }
+  } else {
+    return 0;
+  }
+}
+
+
+int RetiraDaPosicao(ListaLinearSE *lista, int posN) {
+  int pos = lista->ultimo;
+  int i;
+
+  if (!listaVaziaLLSE(lista)) {
+    for (i = posN; i < pos; i++) {
+      lista->itens[i - 1] = lista->itens[i];
+    }
+    lista->ultimo--;
+    return 1;
+  } else {
+    return 0;
+  }
+}
+*/
