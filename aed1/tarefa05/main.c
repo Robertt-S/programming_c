@@ -3,17 +3,50 @@
 #include <string.h>
 #include "ListaLinearED.h"
 
-void imprimeMenu();
 void leDadosAluno(TipoItem*);
-void imprimeDadosAluno(TipoItem);
 
 int main(){
   ListaLinearED turmaAED;
-  int op = 0, RA, pos;
   TipoItem item;
+  int op = 0, RA, posisao;
   
   inicializaListaLLED(&turmaAED);
-  
+
+  leDadosAluno(&item);
+
+  printf("Dê-me a Posição: ");
+  scanf("%d", &posicao);
+
+  adicionaNaPosicao(&turmaAED, item, posicao);
+
+
+
+
+
+  return 0;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /*
   while(op != 5){
     imprimeMenu();
     printf("Opcao: ");
@@ -94,10 +127,12 @@ void imprimeDadosAluno(TipoItem item){
     printf("\nNota %i: %.1f",i+1,item.notas[i]);
   }
   printf("\nFrequencia: %i\n",item.freq);
-}
 
 
-/*
+  */
 
 
-*/
+
+
+
+

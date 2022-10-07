@@ -22,6 +22,7 @@ typedef struct{
   int ultimo;
 } ListaLinearED;
 
+
 int listaVaziaLLED(ListaLinearED*);
 void inicializaListaLLED(ListaLinearED*);
 void destroiListaLLED(ListaLinearED*);
@@ -33,3 +34,8 @@ int removeDoFinalLLED(ListaLinearED*,TipoItem*);
 int removeDoInicioLLED(ListaLinearED*,TipoItem*);
 int buscaItemNaListaLLED(ListaLinearED*,int,TipoItem*,int*);
 int verificaIgualdade(TipoItem,int);
+
+int leDadosAluno(TipoItem*);
+int adicinaNaPosicao(ListaLinearED*, TipoItem, int);
+int retiraDaPosicao(ListaLinearED*, TipoItem*, int);
+int retiraEspecifico(ListaLinearED*, TipoItem*, int);

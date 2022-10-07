@@ -70,6 +70,7 @@ int insereNoFinalLLED(ListaLinearED *lista,TipoItem item){
 
 int insereNoInicioLLED(ListaLinearED *lista,TipoItem item){
   TipoNoh *novoNoh;
+
   novoNoh = (TipoNoh*) malloc(sizeof(TipoNoh));
   if(novoNoh != NULL){
     novoNoh->item = item;
@@ -83,6 +84,7 @@ int insereNoInicioLLED(ListaLinearED *lista,TipoItem item){
 
 int removeDoFinalLLED(ListaLinearED *lista,TipoItem *item){
   TipoNoh *ptrAux1, *ptrAux2;
+
   if(!listaVaziaLLED(lista)){
     ptrAux1 = lista->inicioLista;
     ptrAux2 = ptrAux1->prox;
@@ -143,3 +145,41 @@ int verificaIgualdade(TipoItem item,int info){
   return 0;
 }
 
+
+
+
+void leDadosAluno(TipoItem *item){
+  int i;
+  printf("\nRA: ");
+  scanf("%i",&item->RA);
+  getchar();
+  printf("Nome: ");
+  fgets(item->nome,sizeof(item->nome),stdin);
+  item->nome[strlen(item->nome)-1] = '\0';
+  for(i=0;i<3;i++){
+    printf("Nota %i: ",i+1);
+    scanf("%f",&item->notas[i]);
+  }
+  printf("Frequencia: ");
+  scanf("%i",&item->freq);
+}
+
+
+int adicinaNaPosicao(ListaLinearED *lista, TipoItem item, int posicao) {
+
+
+
+
+
+
+}
+
+
+int retiraDaPosicao(ListaLinearED *lista, TipoItem *item, int posicao) {
+
+}
+
+
+int retiraEspecifico(ListaLinearED *lista, TipoItem *item, int ra) {
+
+}
