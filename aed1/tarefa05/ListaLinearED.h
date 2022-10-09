@@ -35,7 +35,7 @@ int removeDoInicioLLED(ListaLinearED*,TipoItem*);
 int buscaItemNaListaLLED(ListaLinearED*,int,TipoItem*,int*);
 int verificaIgualdade(TipoItem,int);
 
-int leDadosAluno(TipoItem*);
-int adicinaNaPosicao(ListaLinearED*, TipoItem, int);
+void leDadosAluno(TipoItem*);
+int adicionaNaPosicao(ListaLinearED*, TipoItem, int);
 int retiraDaPosicao(ListaLinearED*, TipoItem*, int);
-int retiraEspecifico(ListaLinearED*, TipoItem*, int);
+int retiraEspecifico(ListaLinearED*,TipoItem*, int);

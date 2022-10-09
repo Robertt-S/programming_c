@@ -3,28 +3,65 @@
 #include <string.h>
 #include "ListaLinearED.h"
 
-void leDadosAluno(TipoItem*);
-
 int main(){
   ListaLinearED turmaAED;
   TipoItem item;
-  int op = 0, RA, posisao;
+  int i, alunos, RA, posicao;
   
   inicializaListaLLED(&turmaAED);
-
-  leDadosAluno(&item);
-
-  printf("Dê-me a Posição: ");
+  
+  printf("Quantos alunos a cadastrar: ");
+  scanf("%d", &alunos);
+  
+  for (i = 0; i < alunos; i++) {
+    printf("\nPasse-me os dados...\n");
+    
+    leDadosAluno(&item);
+    insereNoInicioLLED(&turmaAED, item);
+  }
+  
+  
+  printf("\n\nDê-me a posição a inserir: ");
   scanf("%d", &posicao);
-
+  
+  leDadosAluno(&item);
   adicionaNaPosicao(&turmaAED, item, posicao);
-
-
-
-
-
+  
+  printf("\n\n--- Lista ---\n");
+  imprimeListaLLED(&turmaAED);
+  printf("\n");
+  
+  
+  
+  
+  printf("Dê-me a posição a retirar: ");
+  scanf("%d", &posicao);
+  
+  retiraDaPosicao(&turmaAED, &item, posicao);
+  
+  printf("\n\n--- Lista ---\n");
+  imprimeListaLLED(&turmaAED);
+  printf("\n");
+  
+  printf("\nItem removido: %d\n", item.RA);
+  
+  
+  
+  
+  printf("Dê-me o item a retirar...\nRA: ");
+  scanf("%d", &RA);
+  
+  retiraEspecifico(&turmaAED, &item, RA);
+  
+  printf("\n\n--- Lista ---\n");
+  imprimeListaLLED(&turmaAED);
+  printf("\n");
+  
+  printf("\nItem removido: %d\n", item.RA);
+  
+  printf("\n\nultimo: %d\n", turmaAED.ultimo);
+  
   return 0;
-
 }
 
 
@@ -46,7 +83,7 @@ int main(){
 
 
 
-  /*
+/*
   while(op != 5){
     imprimeMenu();
     printf("Opcao: ");
@@ -129,10 +166,4 @@ void imprimeDadosAluno(TipoItem item){
   printf("\nFrequencia: %i\n",item.freq);
 
 
-  */
-
-
-
-
-
-
+*/
