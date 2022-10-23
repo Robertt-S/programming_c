@@ -18,14 +18,16 @@ int filaVazia(TipoFila *fila){
 
 int insereNaFila(TipoFila *fila,TipoItem item){
   TipoNoh *novoNoh;
+  
   novoNoh = (TipoNoh*) malloc(sizeof(TipoNoh));
+  
   if(novoNoh!=NULL){
     if(!filaVazia(fila)){
       fila->fim->prox = novoNoh;
-    }
-    else{
+    }else{
       fila->inicio = novoNoh;
     }
+    
     fila->n++;
     novoNoh->item = item;
     novoNoh->prox = NULL;
@@ -37,6 +39,7 @@ int insereNaFila(TipoFila *fila,TipoItem item){
 
 int retiraDaFila(TipoFila *fila,TipoItem *item){
   TipoNoh *ptrAux;
+  
   if(!filaVazia(fila)){
     ptrAux = fila->inicio;
     *item = ptrAux->item;
@@ -56,6 +59,7 @@ int retiraDaFila(TipoFila *fila,TipoItem *item){
 
 int imprimeFila(TipoFila *fila){
   TipoNoh *ptrAux;
+  
   if(!filaVazia(fila)){
     ptrAux = fila->inicio;
     while(ptrAux!=NULL){
