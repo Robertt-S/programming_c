@@ -13,7 +13,7 @@ typedef struct list info;
 int main() {
   info personalInfo;
   
-  printf("%p\n", personalInfo.pointer->pointer);
+  printf("%d\n", personalInfo.pointer->num);
   
   return 0;
 }

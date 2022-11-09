@@ -46,7 +46,7 @@ int retiraDaFila(TipoFila *fila,TipoItem *item){
 int imprimeFila(TipoFila *fila){
   int i;
   if(!filaVazia(fila)){
-    if(fila->inicio<fila->fim){
+    if(fila->inicio < fila->fim){
       for(i=fila->inicio;i<fila->fim;i++)
         imprimeItem(fila->itens[i]);
     }
