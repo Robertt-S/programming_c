@@ -45,7 +45,7 @@ void imprimeListaLLED(ListaLinearED *lista){
     }
   }
 }
-
+/*
 int insereNoFinalLLED(ListaLinearED *lista,TipoItem item){
   TipoNoh *novoNoh, *ptrAux;
   
@@ -70,6 +70,41 @@ int insereNoFinalLLED(ListaLinearED *lista,TipoItem item){
   }
   return 0;
 }
+*/
+
+
+
+
+int insereNoFinalLLED(ListaLinearED *lista,TipoItem item) {
+  TipoNoh *ptrAux, *novoNoh;
+  
+  if (listaVaziaLLED(lista)) {
+    insereNoInicioLLED(lista, item);
+    return 1;
+  } else {
+    novoNoh = (TipoNoh*) malloc(sizeof(TipoNoh));
+    
+    ptrAux = lista->inicioLista;
+    
+    if (novoNoh != NULL) {
+      while (ptrAux->prox != NULL) {
+        ptrAux = ptrAux->prox;
+      }
+      
+      ptrAux->prox = novoNoh;
+      novoNoh->prox = NULL;
+      novoNoh->item = item;
+      lista->ultimo++;
+    }
+    
+    return 1;
+  }
+  
+  return 0;
+}
+
+
+
 
 int insereNoInicioLLED(ListaLinearED *lista,TipoItem item){
   TipoNoh *novoNoh;
@@ -85,6 +120,7 @@ int insereNoInicioLLED(ListaLinearED *lista,TipoItem item){
   }
   return 0;
 }
+
 
 int removeDoFinalLLED(ListaLinearED *lista,TipoItem *item){
   TipoNoh *ptrAux1, *ptrAux2;
@@ -111,6 +147,34 @@ int removeDoFinalLLED(ListaLinearED *lista,TipoItem *item){
   return 0;
 }
 
+
+/* ////==== erro embaixo 
+int removeDoFinalLLED(ListaLinearED *lista,TipoItem *item) {
+  TipoNoh *ptrAux1, *ptrAux2;
+  
+  if (!listaVaziaLLED(lista)) {
+    ptrAux1 = lista->inicioLista;
+    ptrAux2 = lista->inicioLista->prox;
+    
+    while (ptrAux2 != NULL) {
+      ptrAux1 = ptrAux1->prox;
+      ptrAux2 = ptrAux2->prox;
+    }
+    
+    free(ptrAux1);
+    ptrAux1->prox = NULL;
+    lista->ultimo--;
+    *item = ptrAux1->item;
+    
+    return 1;
+  }
+  
+  return 0;
+}
+*/
+
+
+/*
 int removeDoInicioLLED(ListaLinearED *lista, TipoItem *item){
   TipoNoh *ptrAux;
   if(!listaVaziaLLED(lista)){
@@ -122,7 +186,31 @@ int removeDoInicioLLED(ListaLinearED *lista, TipoItem *item){
     return 1;
   }
   return 0;
+}*/
+
+
+
+
+int removeDoInicioLLED(ListaLinearED *lista, TipoItem *item) {
+  TipoNoh *ptrAux;
+  
+  if (!listaVaziaLLED(lista)) {
+    *item = lista->inicioLista->item;
+    
+    ptrAux = lista->inicioLista;
+    lista->inicioLista = lista->inicioLista->prox;
+    
+    free(ptrAux);
+    lista->ultimo--;
+    
+    return 1;
+  }
+  
+  return 0;
 }
+
+
+
 
 int buscaItemNaListaLLED(ListaLinearED *lista,int info,TipoItem *item,int *pos){
   TipoNoh *ptrAux;
@@ -194,7 +282,7 @@ int adicionaNaPosicao(ListaLinearED *lista, TipoItem item, int posicao) {
     
   } else if (novoNoh != NULL) {
     for (i = 2; i < posicao; i++) {
-      if (ptrAux->prox != NULL) {
+      if (ptrAux != NULL) {
         ptrAux = ptrAux->prox;
       }
     }
@@ -208,7 +296,7 @@ int adicionaNaPosicao(ListaLinearED *lista, TipoItem item, int posicao) {
   return 0;
 }
 
-
+/*
 int retiraDaPosicao(ListaLinearED *lista, TipoItem *item, int posicao) {
   TipoNoh *ptrAux1, *ptrAux2;
   int i;
@@ -241,6 +329,37 @@ int retiraDaPosicao(ListaLinearED *lista, TipoItem *item, int posicao) {
   }
   return 0;
 }
+*/
+
+
+
+int retiraDaPosicao(ListaLinearED *lista, TipoItem *item, int posicao) {
+  TipoNoh *ptrAux1, *ptrAux2;
+  int i;
+  
+  if (!listaVaziaLLED(lista)) {
+    ptrAux1 = lista->inicioLista;
+    
+    for (i = 0; i < posicao - 2; i++) {
+      ptrAux1 = ptrAux1->prox;
+    }
+    
+    ptrAux2 = ptrAux1->prox;
+    ptrAux1->prox = ptrAux1->prox->prox;
+    
+    *item = ptrAux2->item;
+    
+    free(ptrAux2);
+    lista->ultimo--;
+    
+    return 1;
+  }
+  
+  return 0;
+}
+
+
+
 
 
 int retiraEspecifico(ListaLinearED *lista, TipoItem *item, int RA) {

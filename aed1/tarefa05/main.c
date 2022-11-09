@@ -59,6 +59,17 @@ int main(){
   
   printf("\nItem removido: %d\n", item.RA);
   
+  
+  printf("\nremove do final\n");
+  
+  removeDoFinalLLED(&turmaAED, &item);
+  
+  printf("\n\n--- Lista ---\n");
+  imprimeListaLLED(&turmaAED);
+  printf("\n");
+  
+  printf("\nItem removido: %d\n", item.RA);
+  
   printf("\n\nultimo: %d\n", turmaAED.ultimo);
   
   return 0;

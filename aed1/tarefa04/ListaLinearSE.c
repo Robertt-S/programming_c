@@ -84,9 +84,27 @@ int removeDoInicioLLSE(ListaLinearSE *lista, TipoItem *item){
 
 
 
+/*
+int adicionaNaPosicao(ListaLinearSE *lista, TipoItem novoItem, int posicao) {
+  int i, ultimo = lista->ultimo;
+  
+  if (listaVaziaLLSE(lista)) {
+    insereNoInicioLLSE(lista, novoItem);
+    return 1;
+  } else if (listaCheiaLLSE(lista)) {
+    return 0;
+  } else {
+    for (i = ultimo; i > posicao - 1; i--) {
+      lista->itens[i] = lista->itens[i - 1];
+    }
+    lista->itens[posicao - 1] = novoItem;
+    lista->ultimo++;
+  }
+  
+  return 1;
+}
 
-
-
+*/
 
 int adicionaNaPosicao(ListaLinearSE *lista, TipoItem novoItem, int posicao) {
   int i, j = 0, k = 1, ultimo = lista->ultimo;
