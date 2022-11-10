@@ -1,5 +1,6 @@
 #include "postfix_expression.h"
 
+
 int startStack(typeStack *stack) {
   stack->top == NULL;
   
@@ -54,7 +55,13 @@ int organizeStack(typeStack *numberStack, typeStack *operatorStack, char express
       if ((expression[i] != '+') && (expression[i] != '-') && (expression[i] != '*') && (expression[i] != '/')) {
         item.number = expression[i];
         stackNode(numberStack, item);
-      } else {
+      }
+    }
+  }
+  
+  if (!emptyStack(operatorStack)) {
+    for (i = strlen(expression) - 1; i > 0; i--) {
+      if ((expression[i] == '+') || (expression[i] == '-') || (expression[i] == '*') || (expression[i] == '/')) {
         item.operator = expression[i];
         stackNode(operatorStack, item);
         
@@ -70,50 +77,42 @@ int organizeStack(typeStack *numberStack, typeStack *operatorStack, char express
 
 /* 
  Desempilhando dois números e um operador,
- depois empilha o resultado e volta a desempilhar como no início
+ depois empilha o resultado e volta a desempilhar como no início.
 */
 int resultStack(typeStack *numberStack, typeStack *operatorStack, int operatorNum) {
+  typeNode *pAuxOperator, *pAuxNumber;
   typeItem item;
   int i;
   
+  pAuxNumber = numberStack->top;
+  pAuxOperator = operatorStack->top;
+  
   for (i = 0; i < operatorNum; i++) {
-    if (operatorStack->top->item.operator == '+') {
-      item.number = numberStack->top->item.number + numberStack->top->next->item.number;
+    if (pAuxOperator->item.operator == '+' && pAuxOperator->next->item.operator == '+') {
+      item.number = pAuxNumber->item.number + pAuxNumber->next->item.number;
      
       unstackNode(operatorStack);
       unstackNode(numberStack);
       unstackNode(numberStack);
       
       stackNode(numberStack, item);
-    } else if (operatorStack->top->item.operator == '-') {
-      item.number = numberStack->top->item.number - numberStack->top->next->item.number;
+    } else if (pAuxOperator->item.operator == '*') {
+      item.number = pAuxNumber->item.number * pAuxNumber->next->item.number;
       
       unstackNode(operatorStack);
       unstackNode(numberStack);
       unstackNode(numberStack);
       
       stackNode(numberStack, item);
-    } else if (operatorStack->top->item.operator == '*') {
-      item.number = numberStack->top->item.number * numberStack->top->next->item.number;
-      
-      unstackNode(operatorStack);
-      unstackNode(numberStack);
-      unstackNode(numberStack);
-      
-      stackNode(numberStack, item);
-    } else if (operatorStack->top->item.operator == '/') {
-      item.number = numberStack->top->item.number / numberStack->top->next->item.number;
-      
-      unstackNode(operatorStack);
-      unstackNode(numberStack);
-      unstackNode(numberStack);
-      
-      stackNode(numberStack, item);
-    }
+    } 
   }
   
   
   
-  //1234++* = 1 * 2 + 3 + 4
+  1234++* = 1 * 2 + 3 + 4
+  1234+*+ = 1 + 2 * 3 + 4
+  
+  
+  */
   return 0;
 }
