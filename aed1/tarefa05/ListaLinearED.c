@@ -357,8 +357,9 @@ int retiraDaPosicao(ListaLinearED *lista, TipoItem *item, int posicao) {
   
   return 0;
 }
-
-
+     p1    p2
+     1     2     3     4
+i -> |p -> |p -> |p -> |p -> null
 
 
 
