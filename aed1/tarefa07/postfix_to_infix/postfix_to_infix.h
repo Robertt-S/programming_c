@@ -6,7 +6,7 @@
 
 
 typedef struct node {
-  int item;
+  char item;
   struct node *next;
 } typeNode;
 
@@ -15,6 +15,8 @@ typedef struct {
 } typeStack;
 
 
-int stackNode(typeStack*, int);
+int emptyStack(typeStack*);
+int stackNode(typeStack*, char);
 int unstackNode(typeStack*);
-int resultStack(typeStack*, char*);
+char* createInfixExpression(typeStack*, char*);
+void printInfix(char*);
