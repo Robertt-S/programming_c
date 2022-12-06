@@ -51,3 +51,45 @@ TipoArvore montaArvore(TipoArvore raiz,TipoArvore subArvoreEsq,TipoArvore subArv
 }
 
 
+
+
+void imprimeArvorePreOrdem(TipoArvore arvore) {
+  if (!arvoreVazia(arvore)) {
+    printf("%c ", arvore->dado);
+    imprimeArvorePreOrdem(arvore->subArvoreEsq);
+    imprimeArvorePreOrdem(arvore->subArvoreDir);
+  }
+};
+
+
+void imprimeArvoreEmOrdem(TipoArvore arvore) {
+  if (!arvoreVazia(arvore)) {
+    imprimeArvoreEmOrdem(arvore->subArvoreEsq);
+    printf("%c ", arvore->dado);
+    imprimeArvoreEmOrdem(arvore->subArvoreDir);
+  }
+}
+
+
+void imprimeArvorePosOrdem(TipoArvore arvore) {
+  if (!arvoreVazia(arvore)) {
+    imprimeArvorePosOrdem(arvore->subArvoreEsq);
+    imprimeArvorePosOrdem(arvore->subArvoreDir);
+    printf("%c ", arvore->dado);
+  }
+}
+
+
+
+/*
+          A
+       B     C
+      D E   F G
+
+ Pré-ordem: A B D E C F G
+
+ Em ordem: D B E A F C G
+
+ Pós-ordem: D E B F G C A
+ 
+*/

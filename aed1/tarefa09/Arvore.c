@@ -117,3 +117,53 @@ void imprimeArvore(TipoArvore arvore,int n){
     imprimeLista(arvore->listaFilhos,n+1);
   }
 }
+
+
+
+
+void imprimeListaParenteses(TipoLista lista){
+  if(lista!=NULL){
+    imprimeArvoreParenteses(lista->item);
+    imprimeListaParenteses(lista->prox);
+  }
+}
+
+
+void imprimeArvoreParenteses(TipoArvore arvore) {
+  if (!arvoreVazia(arvore)) {
+    if (arvore->listaFilhos != NULL) {
+      printf("( %c ", arvore->dado);
+      imprimeListaParenteses(arvore->listaFilhos);
+      
+    } else {
+      printf("( %c ", arvore->dado);
+      imprimeListaParenteses(arvore->listaFilhos);
+      
+    }
+    
+    printf(")");
+  }
+  
+  return;
+}
+
+
+/*
+     A 
+  B  C  D
+ E F   G H
+
+
+(A (B (E F) C D (G H)))
+
+
+A
+ B
+  E
+  F
+ C
+ D
+  G
+  H
+
+*/
