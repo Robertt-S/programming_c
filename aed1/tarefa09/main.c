@@ -37,6 +37,9 @@ int main(){
   imprimeArvore(raiz,0);
   printf("\n");
   
+  imprimeArvoreParenteses(raiz);
+  printf("\n\n");
+  
   raiz = destroiArvore(raiz);
   
   return 0;
