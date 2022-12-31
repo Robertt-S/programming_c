@@ -38,7 +38,6 @@ int main() {
     }
     
     lastTreeLevel = findTreeHeight(tree);
-    
     printf("Case %d:\n", i + 1);
     for (k = 0; k < lastTreeLevel; k++) {
       printTreeLevel(tree, k);
@@ -96,7 +95,7 @@ typeTree insertOnBinarySearchTree(typeTree tree, int info) {
 
 int findTreeHeight(typeTree tree) {
   int leftTreeHeight, rightTreeHeight;
-    
+  
   if (tree == NULL) {
     return 0;
   } else {
