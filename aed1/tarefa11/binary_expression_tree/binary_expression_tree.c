@@ -134,8 +134,24 @@ void InfixToPostfix(typeInfixToPostfixStack *stack, char infixExpression[], char
 
 
 //--- Functions to handle the stack/tree structure.
+void initializeTreeStack(typeTreeStack *root) {
+  root->top = NULL;
+}
+
+
+int emptyStack(typeTreeStack *stack) {
+  return stack->top == NULL;
+}
+
+
+int emptyTree(typeTreeNode *root){
+  return root == NULL;
+}
+
+
 struct treeNode* createNewNode(char info) {
-  struct treeNode* newNode;
+  struct treeNode *newNode;
+  
   newNode = (struct treeNode*) malloc(sizeof(struct treeNode));
   newNode->info = info;
   newNode->leftTree = NULL;
@@ -146,31 +162,30 @@ struct treeNode* createNewNode(char info) {
 }
 
 
-void stackTreeNode(struct treeNode *root, struct treeNode *nodeToAdd) {
+void stackTreeNode(typeTreeStack *root, struct treeNode *nodeToAdd) {
+  
   if (root == NULL) {
-    root = nodeToAdd;
+    root->top = nodeToAdd;
   } else {
-    nodeToAdd->next = root;
-    root  = nodeToAdd;
+    nodeToAdd->next = root->top;
+    root->top = nodeToAdd;
   }
   return;
 }
 
 
-struct treeNode* unstackTreeNode(struct treeNode *root) {
+typeTreeNode* unstackTreeNode(typeTreeStack *root) {
   struct treeNode *nodeToRemove;
-  nodeToRemove = root;
-  root = root->next;
-  return nodeToRemove;
+  if (!emptyStack(root)) {
+    nodeToRemove = root->top;
+    root->top = nodeToRemove->next;
+    return nodeToRemove;
+  }
+  return NULL;
 }
 
 
-int emptyTree(struct treeNode *root){
-  return root == NULL;
-}
-
-
-struct treeNode* destroyTree(struct treeNode *root) {
+typeTreeNode* destroyTree(typeTreeNode *root) {
   if(!emptyTree(root)){
     destroyTree(root->leftTree);
     destroyTree(root->rightTree);
@@ -180,11 +195,25 @@ struct treeNode* destroyTree(struct treeNode *root) {
 }
 
 
-void buildExpressionTree(struct treeNode* root, char postfixExpression[]) {
-  struct treeNode *auxRightTree, *auxLeftTree, *auxTree;
-  int length = strlen(postfixExpression);
+void destroyTreeStack(typeTreeStack *stack){
+  typeTreeNode *auxP;
   
-  for (int i = 0; i < length; i++) {
+  if (!emptyStack(stack)) {
+    auxP = stack->top;
+    while (auxP != NULL) {
+      stack->top = auxP->next;
+      free(auxP);
+      auxP = stack->top;
+    }
+  }
+}
+
+
+void buildExpressionTree(typeTreeStack *root, char postfixExpression[]) {
+  struct treeNode *auxRightTree, *auxLeftTree, *auxTree;
+  int length = strlen(postfixExpression), i;
+  
+  for (i = 0; i < length; i++) {
     if (postfixExpression[i] == '+' || postfixExpression[i] == '-' || postfixExpression[i] == '*' || postfixExpression[i] == '/' || postfixExpression[i] == '^') {
       auxTree = createNewNode(postfixExpression[i]);
       auxRightTree = unstackTreeNode(root);
@@ -201,7 +230,7 @@ void buildExpressionTree(struct treeNode* root, char postfixExpression[]) {
 }
 
 
-int findTreeHeight(struct treeNode* root) {
+int findTreeHeight(struct treeNode *root) {
   int leftTreeHeight, rightTreeHeight;
   
   if (root == NULL) {

@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define MAX 102
+#define MAX 202
 
 
 // infix to postfix structure.
@@ -30,20 +30,26 @@ void InfixToPostfix(typeInfixToPostfixStack*, char array1[], char array2[]);
 
 
 // tree on a stack structured.
-struct treeNode {
+typedef struct treeNode {
   char info;
   struct treeNode* leftTree;
   struct treeNode* rightTree;
   struct treeNode* next;
-};
+} typeTreeNode;
+
+typedef struct treeStack {
+  typeTreeNode *top;
+} typeTreeStack;
 
 
-struct treeNode* createNewNode(char);
-struct treeNode* unstackTreeNode(struct treeNode*);
-void stackTreeNode(struct treeNode*, struct treeNode*);
-void printInorder(struct treeNode*);
-void buildExpressionTree(struct treeNode*, char array[]);
-struct treeNode* destroyTree(struct treeNode* root);
-int emptyTree(struct treeNode* root);
-int findTreeHeight(struct treeNode*);
-void printTreeLevel(struct treeNode*, int);
+void initializeTreeStack(typeTreeStack*);
+int emptyTree(typeTreeNode*);
+int emptyStack(typeTreeStack*);
+typeTreeNode* createNewNode(char);
+typeTreeNode* unstackTreeNode(typeTreeStack*);
+void stackTreeNode(typeTreeStack*, typeTreeNode*);
+void buildExpressionTree(typeTreeStack*, char array[]);
+void destroyTreeStack(typeTreeStack*);
+typeTreeNode* destroyTree(typeTreeNode*);
+int findTreeHeight(typeTreeNode*);
+void printTreeLevel(typeTreeNode*, int);
