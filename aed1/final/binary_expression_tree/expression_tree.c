@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define MAX 202
+#define MAX 300
 
 
 // infix to postfix structure.
@@ -29,7 +29,7 @@ void InfixToPostfix(typeInfixToPostfixStack*, char array1[], char array2[]);
 
 
 
-// tree on a stack structured.
+// tree on a stack structure.
 typedef struct treeNode {
   char info;
   struct treeNode* leftTree;
@@ -271,6 +271,7 @@ typeTreeNode* unstackTreeNode(typeTreeStack *root) {
   if (!emptyStack(root)) {
     nodeToRemove = root->top;
     root->top = nodeToRemove->next;
+    free(nodeToRemove);
     return nodeToRemove;
   }
   return NULL;
