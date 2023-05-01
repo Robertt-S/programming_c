@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+
 
 int partition(int*, int, int);
 int quickSort(int*, int, int, int*, int*, int);
@@ -12,7 +14,7 @@ int medianIndex(int*, int, int);
 
 
 int main() {
-  int i, arrayLength, median, maxDepth = 0, minDepth, deltaDepth, *array1, *array2;
+  int i, arrayLength, median, maxDepth1 = 0, minDepth1, maxDepth2 = 0, minDepth2, deltaDepth1, deltaDepth2, *array1, *array2;
   
   scanf("%d", &arrayLength);
   
@@ -25,35 +27,19 @@ int main() {
   }
   
   
-  minDepth = arrayLength;
+  minDepth1 = arrayLength;
+  minDepth2 = arrayLength;
   
-  quickSort(array1, 0, arrayLength - 1, &minDepth, &maxDepth, 0);
-  
-  deltaDepth = maxDepth - minDepth;
-  printf("%d\n", deltaDepth);
+  quickSort(array1, 0, arrayLength - 1, &minDepth1, &maxDepth1, 0);
+  medianQuickSort(array2, 0, arrayLength - 1, &minDepth2, &maxDepth2, 0);
   
   
-  minDepth = arrayLength;
-  maxDepth = 0;
+  deltaDepth1 = maxDepth1 - minDepth1;
+  deltaDepth2 = maxDepth2 - minDepth2;
   
-  medianQuickSort(array2, 0, arrayLength - 1, &minDepth, &maxDepth, 0);
-  deltaDepth = maxDepth - minDepth;
   
-  printf("%d\n", deltaDepth);
+  printf("%d\n%d\n", deltaDepth1, deltaDepth2);
   
-  /*  Seeing if the quicksort ran properly.
-  for (i = 0; i < arrayLength; i++) {
-    printf("%d ", array1[i]);
-  }
-  
-  printf("\n");
-  
-  for (i = 0; i < arrayLength; i++) {
-    printf("%d ", array2[i]);
-  }
-  
-  printf("\n");
-  */
   
   free(array1);
   free(array2);
@@ -72,12 +58,13 @@ int quickSort(int *array, int arrayInitial, int arrayEnd, int *minDepth, int *ma
     quickSort(array, arrayPartition + 1, arrayEnd, minDepth, maxDepth, currentDepth + 1);
     
   } else {
+    
     if (currentDepth > (*maxDepth)) {
-    (*maxDepth) = currentDepth;
+      (*maxDepth) = currentDepth;
     }
     
     if (currentDepth < (*minDepth)) {
-    (*minDepth) = currentDepth;
+      (*minDepth) = currentDepth;
     }
   }
   
@@ -142,12 +129,12 @@ int medianPartition(int *array, int arrayInitial, int arrayEnd) {
 int medianIndex(int *array, int arrayInitial, int arrayEnd) {
   int midIndex = (arrayInitial + arrayEnd) / 2;
   
-  if ((midIndex <= array[arrayInitial] && array[arrayInitial] <= array[arrayEnd]) || 
-      (midIndex >= array[arrayInitial] && array[arrayInitial] >= array[arrayEnd])) {
+  if ((array[midIndex] <= array[arrayInitial] && array[arrayInitial] <= array[arrayEnd]) || 
+      (array[midIndex] >= array[arrayInitial] && array[arrayInitial] >= array[arrayEnd])) {
   
     return arrayInitial;
-  } else if ((midIndex <= array[arrayEnd] && array[arrayEnd] <= array[arrayInitial]) || 
-             (midIndex >= array[arrayEnd] && array[arrayEnd] >= array[arrayInitial])) {
+  } else if ((array[midIndex] <= array[arrayEnd] && array[arrayEnd] <= array[arrayInitial]) || 
+             (array[midIndex] >= array[arrayEnd] && array[arrayEnd] >= array[arrayInitial])) {
     
     return arrayEnd;
   } else {
@@ -155,3 +142,17 @@ int medianIndex(int *array, int arrayInitial, int arrayEnd) {
     return midIndex;
   }
 }
+
+/*
+31
+95 37 82 31 73 82 45 83 22 50 78 96 77 62 59 22 95 36 94 49 48 69 98 93 37 96 33 29 78 62 16
+output:
+6
+6
+input:
+12
+6 9 17 61 8 46 83 85 19 71 79 19
+output:
+2
+2
+*/
