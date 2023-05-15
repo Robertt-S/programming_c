@@ -142,7 +142,7 @@ int countingSort(char **arrayWords1, char **arrayWords2, int *wordsPosition, int
   }
   
   
-  for (i = 0; i < wordsNumber; i++) {
+  for (i = 0; i <= wordsNumber; i++) {
     arrayWords1[i] = arrayWords2[i];
   }
   
