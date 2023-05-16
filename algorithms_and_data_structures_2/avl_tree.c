@@ -51,13 +51,13 @@ int main() {
   if (tree != NULL) {
     treeHeight = tree->treeHeight - 1;
     if (tree->leftChild != NULL) {
-      leftTreeHeight = tree->leftChild->treeHeight - 1;
+      leftTreeHeight = tree->leftChild->treeHeight;
     } else {
       leftTreeHeight = 0;
     }
     
     if (tree->rightChild != NULL) {
-      rightTreeHeight = tree->rightChild->treeHeight - 1;
+      rightTreeHeight = tree->rightChild->treeHeight;
     } else {
       rightTreeHeight = 0;
     }
@@ -95,20 +95,20 @@ int main() {
   // not falling in segmentation fault.
   if (foundNode != NULL) {
     if (foundNode->leftChild != NULL && foundNode->rightChild != NULL) {
-      printf("%d, %d, %d\n", foundNode->treeHeight - 1 , foundNode->leftChild->treeHeight - 1, foundNode->rightChild->treeHeight - 1);
+      printf("%d, %d, %d\n", foundNode->treeHeight - 1, foundNode->leftChild->treeHeight, foundNode->rightChild->treeHeight);
       
     } else if (foundNode->leftChild != NULL) {
-      printf("%d, %d, %d\n", foundNode->treeHeight - 1, foundNode->leftChild->treeHeight - 1, 0);
+      printf("%d, %d, %d\n", foundNode->treeHeight - 1, foundNode->leftChild->treeHeight, 0);
       
     } else if (foundNode->rightChild != NULL) {
-      printf("%d, %d, %d\n", foundNode->treeHeight - 1, 0, foundNode->rightChild->treeHeight - 1);
+      printf("%d, %d, %d\n", foundNode->treeHeight - 1, 0, foundNode->rightChild->treeHeight);
       
     } else {
       printf("%d, %d, %d\n", foundNode->treeHeight - 1, 0, 0);
     }
     
   } else {
-    printf("Valor não encontrado\n");
+    printf("Valor nao encontrado\n");
   }
   
   
@@ -138,6 +138,7 @@ int emptyTree(TypeTreeNode *tree){
 }
 
 
+// build a node to insert into the tree.
 TypeTreeNode* newNode(int key) {
   TypeTreeNode *node = (TypeTreeNode*) malloc(sizeof(TypeTreeNode));
   
@@ -301,7 +302,7 @@ TypeTreeNode* removeNode(TypeTreeNode *root, int key) {
   return root;
 }
 
-
+// Search node in the tree.
 TypeTreeNode* searchInTree(TypeTreeNode *tree, int info) {
   if (!emptyTree(tree)) {
     if (tree->key > info) {
@@ -317,6 +318,7 @@ TypeTreeNode* searchInTree(TypeTreeNode *tree, int info) {
 }
 
 
+// Returns a specific tree height.
 int getTreeHeight(TypeTreeNode *tree) {
   if (tree == NULL) {
     return 0;
@@ -325,7 +327,7 @@ int getTreeHeight(TypeTreeNode *tree) {
   return tree->treeHeight;
 }
 
-
+// Function to compare to tree heights.
 int getLargestHeight(int height1, int height2) {
   if (height1 > height2) {
     return height1;
