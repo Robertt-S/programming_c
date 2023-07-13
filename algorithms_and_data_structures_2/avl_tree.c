@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
- 
- 
+
+
 typedef struct treeNode {
   int key;
   int treeHeight;
@@ -128,7 +128,7 @@ int main() {
 
 
 
-TypeTreeNode* initializeTree(){
+TypeTreeNode* initializeTree() {
   return NULL;
 }
 
@@ -327,7 +327,8 @@ int getTreeHeight(TypeTreeNode *tree) {
   return tree->treeHeight;
 }
 
-// Function to compare to tree heights.
+
+// Function to compare tree heights.
 int getLargestHeight(int height1, int height2) {
   if (height1 > height2) {
     return height1;
